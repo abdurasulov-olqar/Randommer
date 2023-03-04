@@ -39,7 +39,13 @@ class Card(Randommer):
         Returns:
             list: list of types
         '''
-        pass
+        url = self.base_url + 'Card/Types'
+        headers = {
+                "X-Api-Key": api_key
+            }
+        response = requests.get(url, headers=headers)
+        return response.json()
+
 
 card = Card()
-print(card.get_card("2d794c6f46094ceb96bd719c1c26c984", "visa"))
+print(card.get_card_types("2d794c6f46094ceb96bd719c1c26c984"))
