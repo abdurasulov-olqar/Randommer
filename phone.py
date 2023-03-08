@@ -14,8 +14,16 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        pass
-    
+        url = self.base_url + 'Phone/Generate'
+        payload = {
+            "CountryCode": CountryCode,
+            "Quantity": Quantity
+        }
+        headers = {
+            "X-Api-Key": api_key
+        }
+        response = requests.get(url, params = payload, headers=headers)
+        return response.json()
     def get_IMEI(self, api_key: str, Quantity: int) -> list:
         '''get bulk imei
 
@@ -26,7 +34,15 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        pass
+        url = self.base_url + 'Phone/IMEI'
+        payload = {
+            "Quantity": Quantity
+        }
+        headers = {
+            "X-Api-Key": api_key
+        }
+        response = requests.get(url, params = payload, headers=headers)
+        return response.json()
     
     def is_valid(self, api_key: str, telephone: str, CountryCode: str) -> bool:
         '''get bulk imei
@@ -39,7 +55,16 @@ class Phone(Randommer):
         Returns:
             bool: is valid
         '''
-        pass
+        url = self.base_url + 'Phone/Validate'
+        payload ={
+            "telephone": telephone,
+            "CountryCode": CountryCode
+        }
+        headers = {
+            "X-Api-Key": api_key
+        }
+        response = requests.get(url, params=payload, headers=headers)
+        return response.json()
     
     def get_countries(self, api_key: str) -> list:
         '''get countries
@@ -50,4 +75,13 @@ class Phone(Randommer):
         Returns:
             list: lsit of countries
         '''
-        pass
+        url = self.base_url + 'Phone/Countries'
+        headres = {
+            "X-Api-Key": api_key
+        }
+        response = requests.get(url, headers=headres)
+        return response.json()
+    
+phone = Phone()
+print(phone.get_countries("2d794c6f46094ceb96bd719c1c26c984"))
+
